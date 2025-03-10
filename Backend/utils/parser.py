@@ -107,3 +107,14 @@ def parse_github_tree(tree_data):
     
     build_structure(root_dir)
     return "\n".join(result)
+
+
+def get_file_structure(url: str):
+    #first is to get owner then repo name then sha then repo json.
+    #then get the tree sha from the repo json
+    owner, repo, last_string = parse_owner_repo(url)
+    sha = fetch_repo_sha(owner, repo)
+    tree = fetch_repo_tree(owner, repo, sha)
+    file_structure = parse_github_tree({"owner": owner, "repo": repo, "tree": tree})
+
+    return {"file_structure": file_structure}
