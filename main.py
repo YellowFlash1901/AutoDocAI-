@@ -60,6 +60,7 @@ async def generate_readme(request: FileStructureRequest):
         response = requests.post("http://127.0.0.1:11434/api/generate", json=payload)
         
         if response.status_code == 200:
+            print(response.json())
             return {"readme": response.json()["response"]}
         else:
             raise HTTPException(
