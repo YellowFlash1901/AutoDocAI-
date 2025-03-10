@@ -3,7 +3,7 @@ import requests
 from pydantic import BaseModel
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
-from src.parser import parse_owner_repo , fetch_repo_sha , fetch_repo_tree , parse_github_tree
+from utils.parser import parse_owner_repo, fetch_repo_sha, fetch_repo_tree, parse_github_tree
 from typing import Dict, Any, Union
 
 app = FastAPI()
@@ -36,7 +36,9 @@ async def generate_readme(request: FileStructureRequest):
     try:
 
         prompt = f"""
-        Generate a well-structured `README.md` file for the following project based on its file structure:
+        You are an AI that generates fully formatted `README.md` files.
+
+        Generate a well-structured **Markdown (`README.md`)** file based on the following project file structure
         {json.dumps(request.file_structure, indent=2)}
         Format the output as a valid Markdown file so that it can be copied and used directly.
         """
@@ -51,10 +53,11 @@ async def generate_readme(request: FileStructureRequest):
         
         if response.status_code == 200:
             response_data = response.json()
+            readme = response_data.get("response", "").strip()
             return {
                 "success": True,
                 "code": response.status_code,
-                "readme": response_data.get("response", "").strip()  # Ensuring only README content
+                "readme": readme  # Ensuring only README content
             }
         else:
             raise HTTPException(
