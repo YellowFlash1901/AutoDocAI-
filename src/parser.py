@@ -25,11 +25,9 @@ def fetch_repo_sha(owner: str, repo: str):
 
 def fetch_repo_tree(owner: str, repo: str, sha: str):
     url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{sha}?recursive=1"
-    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        print("fetch repo",data)
         return data.get('tree')          
     return None
 
@@ -57,7 +55,6 @@ def parse_github_tree(tree_data):
     
     # Sort tree items by path depth
     sorted_tree = sorted(tree, key=lambda x: (x['path'].count('/'), x['path']))
-    
     # Build the directory structure
     for item in sorted_tree:
         path = item['path']

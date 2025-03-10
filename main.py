@@ -34,18 +34,21 @@ async def generate_readme(request: FileStructureRequest):
         JSONResponse: The generated README content or error message
     """
     try:
+
         prompt = f"""
-        Here is the file structure of a project:
-        
+        Generate a well-structured `README.md` file for the following project based on its file structure:
+
         {json.dumps(request.file_structure, indent=2)}
-        
-        Based on this, generate a README.md file with:
-        - A project title
-        - A short description
-        - Installation instructions (if applicable)
-        - Usage instructions
-        - Explanation of the folder structure
-        - Contribution guidelines (if relevant)
+
+        Ensure the `README.md` contains:
+        - A **clear project title** at the top.
+        - A **concise description** explaining what the project does.
+        - **Installation instructions** (if applicable).
+        - **Usage instructions** with relevant examples.
+        - A **folder structure section** explaining key directories and files.
+        - **Contribution guidelines** (if relevant).
+
+        Format the output as a valid Markdown file so that it can be copied and used directly.
         """
 
         payload = {
