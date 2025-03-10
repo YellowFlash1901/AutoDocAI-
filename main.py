@@ -37,17 +37,7 @@ async def generate_readme(request: FileStructureRequest):
 
         prompt = f"""
         Generate a well-structured `README.md` file for the following project based on its file structure:
-
         {json.dumps(request.file_structure, indent=2)}
-
-        Ensure the `README.md` contains:
-        - A **clear project title** at the top.
-        - A **concise description** explaining what the project does.
-        - **Installation instructions** (if applicable).
-        - **Usage instructions** with relevant examples.
-        - A **folder structure section** explaining key directories and files.
-        - **Contribution guidelines** (if relevant).
-
         Format the output as a valid Markdown file so that it can be copied and used directly.
         """
 
