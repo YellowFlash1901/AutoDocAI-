@@ -21,6 +21,7 @@ export default function Home() {
           const res = response.data.readme;
           const string = res.replace(/\\n/g, '\n');
           setNewMarkdown(string);
+          console.log(string);
       }
       )
       .catch((error) => {

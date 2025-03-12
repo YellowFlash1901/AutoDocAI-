@@ -1,1 +1,4 @@
 fastapi uvicorn
+agno
+openai 
+groq
