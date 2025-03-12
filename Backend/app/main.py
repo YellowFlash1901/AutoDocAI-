@@ -34,7 +34,7 @@ app.add_middleware(
 # Step 4: Initialize Groq client with explicit API key
 groq_client = Groq(
     id="llama-3.3-70b-versatile",
-    api_key="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"
+    api_key=groq_api_key
 )
 
 # Step 5: Initialize agent with explicit API key
