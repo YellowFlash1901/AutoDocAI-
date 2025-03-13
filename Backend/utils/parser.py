@@ -26,6 +26,7 @@ def fetch_repo_sha(owner: str, repo: str):
 def fetch_repo_tree(owner: str, repo: str, sha: str):
     url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{sha}?recursive=1"
     response = requests.get(url)
+    print("response",response)
     if response.status_code == 200:
         data = response.json()
         return data.get('tree')          

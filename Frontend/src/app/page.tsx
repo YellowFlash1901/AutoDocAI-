@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 export default function Home() {
   const [markdown, setMarkdown] = useState('');
   const [Newmarkdown, setNewMarkdown] = useState('');
@@ -45,7 +46,11 @@ export default function Home() {
         <div>
           <h2 className="text-lg font-bold mb-2">Preview</h2>
           <div className="border border-gray-300 rounded-lg p-4 bg-gray-100 min-h-64">
-            <ReactMarkdown>{Newmarkdown}</ReactMarkdown>
+            <ReactMarkdown 
+            remarkPlugins={[remarkGfm]} 
+            children={Newmarkdown} 
+          />
+
           </div>
         </div>
       </div>
